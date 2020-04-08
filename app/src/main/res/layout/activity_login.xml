@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/onboardingbackground"
+    tools:context=".login">
+    <CheckBox
+        android:id="@+id/checkBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="@string/remember_me"
+        android:fontFamily="@font/montserrat_light"
+
+        android:textColor="#707070"
+        app:layout_constraintStart_toStartOf="@+id/cnf_password_register"
+        app:layout_constraintTop_toBottomOf="@+id/cnf_password_register" />
+
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/montserrat_light"
+        android:text="@string/hello"
+        android:textAllCaps="false"
+        android:textSize="50sp"
+
+        app:layout_constraintBottom_toTopOf="@+id/email_register"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.386"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.761" />
+
+    <EditText
+        android:id="@+id/cnf_password_register"
+        android:layout_width="320dp"
+        android:layout_height="50dp"
+        android:layout_marginBottom="336dp"
+        android:autofillHints="Password"
+        android:background="@drawable/input_feild"
+        android:ems="10"
+        android:fontFamily="@font/montserrat_light"
+        android:hint="Password"
+        android:inputType="textPassword"
+        android:textColorHint="#707070"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.438"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <EditText
+        android:id="@+id/email_register"
+        android:layout_width="320dp"
+        android:layout_height="50dp"
+        android:autofillHints="Email ID"
+        android:background="@drawable/input_feild"
+        android:ems="10"
+        android:fontFamily="@font/montserrat_light"
+        android:hint="Username"
+        android:inputType="textPersonName"
+        android:textColorHint="#707070"
+        app:layout_constraintBottom_toTopOf="@+id/cnf_password_register"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.439"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.888" />
+
+    <Button
+        android:id="@+id/registerbtn_login"
+        android:layout_width="117dp"
+        android:layout_height="52dp"
+        android:background="@drawable/button"
+        android:fontFamily="@font/montserrat_light"
+        android:text="@string/login"
+        android:textAllCaps="false"
+        android:textColor="#ffffff"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.438"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cnf_password_register"
+        app:layout_constraintVertical_bias="0.289" />
+
+    <TextView
+        android:id="@+id/textviewlink"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/montserrat_light"
+        android:text="Only Scoreboard -->"
+        android:textColor="@color/red_pink"
+        android:textSize="20dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cnf_password_register"
+        app:layout_constraintVertical_bias="0.864" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

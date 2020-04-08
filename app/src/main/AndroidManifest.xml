@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.solvabit.mate">
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme.NoActionBar">
+        <activity android:name=".AboutUs"></activity>
+        <activity
+            android:name=".splashscreen"
+            android:noHistory="true"
+            android:screenOrientation="fullSensor">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".standing"
+            android:screenOrientation="fullSensor" />
+        <activity
+            android:name=".registration"
+            android:screenOrientation="fullSensor" />
+
+        <activity
+            android:name=".SimpleLeaderboard"
+            android:screenOrientation="fullSensor" />
+        <activity
+            android:name=".Leaderboard"
+            android:screenOrientation="fullSensor" />
+        <activity
+            android:name=".login"
+            android:screenOrientation="fullSensor" />
+        <activity
+            android:name=".welcomescreen"
+            android:screenOrientation="fullSensor" />
+        <activity
+            android:name=".MainActivity"
+            android:screenOrientation="fullSensor"
+            />
+    </application>
+
+</manifest>

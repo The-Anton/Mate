@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+
+    <string-array name="AndhraPradesh"></string-array>
+    <string-array name="ArunachalPradesh"></string-array>
+    <string-array name="Assam"></string-array>
+    <string-array name="Bihar"></string-array>
+    <string-array name="Chhattisgarh"></string-array>
+    <string-array name="Goa"></string-array>
+    <string-array name="Gujarat"></string-array>
+    <string-array name="Haryana"></string-array>
+    <string-array name="HimachalPradesh"></string-array>
+    <string-array name="Jharkhand"></string-array>
+    <string-array name="Karnataka"></string-array>
+    <string-array name="Kerala"></string-array>
+    <string-array name="MadhyaPradesh"></string-array>
+    <string-array name="Maharastra">
+        <item>College</item>
+        <item>Army Institute Of Technology</item>
+        <item>College Of Military Engineering</item>
+    </string-array>
+    <string-array name="Manipur"></string-array>
+    <string-array name="Meghalaya"></string-array>
+    <string-array name="Mizoram"></string-array>
+    <string-array name="Nagaland"></string-array>
+    <string-array name="Odisha"></string-array>
+    <string-array name="Punjab"></string-array>
+    <string-array name="Rajasthan"></string-array>
+    <string-array name="Sikkim"></string-array>
+    <string-array name="TamilNadu"></string-array>
+    <string-array name="Telangana"></string-array>
+    <string-array name="Tripura"></string-array>
+    <string-array name="UttarPradesh"></string-array>
+    <string-array name="Uttarakhand"></string-array>
+    <string-array name="WestBengal"></string-array>
+
+</resources>

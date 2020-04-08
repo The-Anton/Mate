@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">M.A.T.E</string>
+    <string name="next">NEXT</string>
+    <string name="skip_intro">SKIP</string>
+    <string name="login">Login</string>
+    <string name="hello">Hello there!</string>
+    <string name="remember_me">Remember me</string>
+    <string name="you_are_not_a_member">You are not a member!</string>
+    <string name="register">REGISTER</string>
+    <string name="reg">Register</string>
+    <string name="sign_up">Sign Up</string>
+
+    <string name="title_activity_splashscreen">splashscreen</string>
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
+</resources>
