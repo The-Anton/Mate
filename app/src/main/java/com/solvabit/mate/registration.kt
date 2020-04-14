@@ -3,9 +3,8 @@ package com.solvabit.mate
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
-import android.widget.ArrayAdapter
-import android.widget.Spinner
-import android.widget.Toast
+import android.view.View
+import android.widget.*
 import androidx.fragment.app.FragmentActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
@@ -13,51 +12,55 @@ import kotlinx.android.synthetic.main.activity_login.email_register
 import kotlinx.android.synthetic.main.activity_registration.*
 
 
-
-class registration : BaseActivity() {
+class registration : BaseActivity(), AdapterView.OnItemClickListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_registration)
 
-        val spinnerState: Spinner =findViewById(R.id.state)
-
-
-
+        val spinnerState: Spinner = findViewById(R.id.state)
 
 
         ArrayAdapter.createFromResource(this, R.array.States, android.R.layout.simple_spinner_item)
-            .also {
-                    adapter -> adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-            spinnerState.adapter = adapter
-        }
+            .also { adapter ->
+                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+                spinnerState.adapter = adapter
+            }
 
-        val spinnerCollege: Spinner =findViewById(R.id.college)
+        val spinnerCollege: Spinner = findViewById(R.id.college)
 
-        ArrayAdapter.createFromResource(this, R.array.Maharastra, android.R.layout.simple_spinner_item)
-            .also {
-                    adapter -> adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        ArrayAdapter.createFromResource(
+            this,
+            R.array.Maharastra,
+            android.R.layout.simple_spinner_item
+        )
+            .also { adapter ->
+                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
                 spinnerCollege.adapter = adapter
             }
 
         val auth = FirebaseAuth.getInstance()
-        registerbtn_register.setOnClickListener{
+        registerbtn_register.setOnClickListener {
             performRegister()
 
         }
 
     }
 
-    private fun performRegister(){
+    override fun onItemClick(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
 
-        val email=email_register.text.toString()
-        val password=password_register.text.toString()
-        val fistname=firstname_register.text.toString()
-        val lastname=lastname_register.text.toString()
-        val phonenumber=phone_register.text.toString()
+    private fun performRegister() {
+
+        val email = email_register.text.toString()
+        val password = password_register.text.toString()
+        val fistname = firstname_register.text.toString()
+        val lastname = lastname_register.text.toString()
+        val phonenumber = phone_register.text.toString()
         val cnfPassword = cnf_password_register.text.toString()
 
-        if(password == cnfPassword) {
+        if (password == cnfPassword) {
             if (email.isEmpty() || password.isEmpty()) {
                 Toast.makeText(this, "Please enter credentials", Toast.LENGTH_SHORT).show()
                 return
@@ -90,7 +93,7 @@ class registration : BaseActivity() {
                                     Log.d("Main", "Email sent.")
                                 }
                             }
-                        Toast.makeText(
+                       Toast.makeText(
                             this,
                             "Successfully registered. Check your email for verification",
                             Toast.LENGTH_SHORT
@@ -112,9 +115,7 @@ class registration : BaseActivity() {
                 .addOnFailureListener {
                     Log.d("Main", "Failed to create account : $(it.message)")
                 }
-        }
-        else
-        {
+        } else {
             Toast.makeText(
                 this,
                 "Password didn't matched ",
@@ -124,21 +125,51 @@ class registration : BaseActivity() {
         }
     }
 
-    private fun saveUserToFirebaseDatabase(){
-            val uid=FirebaseAuth.getInstance().uid ?: ""
-            val ref=FirebaseDatabase.getInstance().getReference("/State/Maharastra/Army Institute Of Technology/Users/$uid")
 
-            val user=User(uid, firstname_register.text.toString(),lastname_register.text.toString(),phone_register.text.toString())
+    private fun saveUserToFirebaseDatabase() {
 
-        Log.d("Main", "location to enter data ")
+        val user = FirebaseAuth.getInstance().currentUser
 
-            ref.setValue(user)
-                .addOnSuccessListener {
-                    Log.d("Main", "details saved successfully in database : $(it.result.user.uid)")
-                }
+        if (user != null) {
+            user.let {
+                // Name, email address, and profile photo Url
+                val name = user.displayName
+                val email = user.email
+                val photoUrl = user.photoUrl
+
+                // Check if user's email is verified
+                val emailVerified = user.isEmailVerified
+
+
+
+            }
+            val uid = user.uid
+            Toast.makeText(
+                this, uid,
+                Toast.LENGTH_SHORT
+            ).show()
+        } else {
+
+            Toast.makeText(
+                this, "Failed to fetch uID",
+                Toast.LENGTH_SHORT
+            ).show()
+            // No user is signed in
+        }
+
+
+
+
     }
 
-    class User(val uid: String, val firstname:String , val lastname: String , val phonenumber : String)
+    /*class User(
+        val uid: String,
+        val firstname: String,
+        val lastname: String,
+        val phonenumber: String
+    )*/
+
+
 }
 
 

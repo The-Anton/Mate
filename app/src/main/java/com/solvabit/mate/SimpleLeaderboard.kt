@@ -4,6 +4,8 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.widget.Toast
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.activity_leaderboard.*
 
@@ -41,6 +43,7 @@ class SimpleLeaderboard : BaseActivity() {
 
     override fun onStart() {
         super.onStart()
+
         leaderboardDatabase.addSnapshotListener { snapshot, e ->
             if (e != null) {
                 Log.w("---->", "Listen failed.", e)
@@ -95,4 +98,9 @@ class SimpleLeaderboard : BaseActivity() {
         }
 
     }
+
+
+
+
+
 }
