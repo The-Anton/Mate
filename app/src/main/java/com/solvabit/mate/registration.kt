@@ -8,11 +8,14 @@ import android.widget.*
 import androidx.fragment.app.FragmentActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.activity_login.email_register
 import kotlinx.android.synthetic.main.activity_registration.*
 
 
 class registration : BaseActivity(), AdapterView.OnItemClickListener {
+    val mDatabaseRef = FirebaseFirestore.getInstance()
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -55,9 +58,6 @@ class registration : BaseActivity(), AdapterView.OnItemClickListener {
 
         val email = email_register.text.toString()
         val password = password_register.text.toString()
-        val fistname = firstname_register.text.toString()
-        val lastname = lastname_register.text.toString()
-        val phonenumber = phone_register.text.toString()
         val cnfPassword = cnf_password_register.text.toString()
 
         if (password == cnfPassword) {
@@ -83,7 +83,6 @@ class registration : BaseActivity(), AdapterView.OnItemClickListener {
                             "Account created successfully with uid : $(it.result.user.uid)"
                         )
 
-
                         val auth = FirebaseAuth.getInstance()
                         val user = auth.currentUser
 
@@ -91,6 +90,7 @@ class registration : BaseActivity(), AdapterView.OnItemClickListener {
                             ?.addOnCompleteListener { task ->
                                 if (task.isSuccessful) {
                                     Log.d("Main", "Email sent.")
+
                                 }
                             }
                        Toast.makeText(
@@ -128,47 +128,30 @@ class registration : BaseActivity(), AdapterView.OnItemClickListener {
 
     private fun saveUserToFirebaseDatabase() {
 
-        val user = FirebaseAuth.getInstance().currentUser
+        val uid= fetchUserUid()
+        val dbRef = mDatabaseRef.collection("user").document(uid.toString())
+        val firstname = firstname_register.text.toString()
+        val lastname = lastname_register.text.toString()
+        val phonenumber = phone_register.text.toString()
 
-        if (user != null) {
-            user.let {
-                // Name, email address, and profile photo Url
-                val name = user.displayName
-                val email = user.email
-                val photoUrl = user.photoUrl
-
-                // Check if user's email is verified
-                val emailVerified = user.isEmailVerified
-
-
-
-            }
-            val uid = user.uid
-            Toast.makeText(
-                this, uid,
-                Toast.LENGTH_SHORT
-            ).show()
-        } else {
-
-            Toast.makeText(
-                this, "Failed to fetch uID",
-                Toast.LENGTH_SHORT
-            ).show()
-            // No user is signed in
-        }
+        dbRef.update("firstName", firstname)
+        dbRef.update("lastName", lastname)
+        dbRef.update("phone", phonenumber)
+        dbRef.update("role", "Student")
+        dbRef.update("college", "Army Institute Of Technology")
 
 
 
 
     }
 
-    /*class User(
-        val uid: String,
-        val firstname: String,
-        val lastname: String,
-        val phonenumber: String
-    )*/
 
+
+    private fun fetchUserUid(): String? {
+        val user = FirebaseAuth.getInstance().currentUser
+        val uid = user?.uid
+        return uid
+    }
 
 }
 
