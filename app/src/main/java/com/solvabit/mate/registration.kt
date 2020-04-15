@@ -14,6 +14,7 @@ import kotlinx.android.synthetic.main.activity_registration.*
 
 
 class registration : BaseActivity(), AdapterView.OnItemClickListener {
+
     val mDatabaseRef = FirebaseFirestore.getInstance()
 
 
@@ -22,8 +23,6 @@ class registration : BaseActivity(), AdapterView.OnItemClickListener {
         setContentView(R.layout.activity_registration)
 
         val spinnerState: Spinner = findViewById(R.id.state)
-
-
         ArrayAdapter.createFromResource(this, R.array.States, android.R.layout.simple_spinner_item)
             .also { adapter ->
                 adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
@@ -31,7 +30,6 @@ class registration : BaseActivity(), AdapterView.OnItemClickListener {
             }
 
         val spinnerCollege: Spinner = findViewById(R.id.college)
-
         ArrayAdapter.createFromResource(
             this,
             R.array.Maharastra,
@@ -43,6 +41,7 @@ class registration : BaseActivity(), AdapterView.OnItemClickListener {
             }
 
         val auth = FirebaseAuth.getInstance()
+
         registerbtn_register.setOnClickListener {
             performRegister()
 
@@ -66,8 +65,6 @@ class registration : BaseActivity(), AdapterView.OnItemClickListener {
                 return
             }
 
-
-
             FirebaseAuth.getInstance().createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener {
                     if (!it.isSuccessful) {
@@ -82,6 +79,7 @@ class registration : BaseActivity(), AdapterView.OnItemClickListener {
                             "Main",
                             "Account created successfully with uid : $(it.result.user.uid)"
                         )
+                        saveUserToFirebaseDatabase()
 
                         val auth = FirebaseAuth.getInstance()
                         val user = auth.currentUser
@@ -102,11 +100,6 @@ class registration : BaseActivity(), AdapterView.OnItemClickListener {
                         intent.flags =
                             Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
                         startActivity(intent)
-
-
-
-                        saveUserToFirebaseDatabase()
-
 
                     }
 
