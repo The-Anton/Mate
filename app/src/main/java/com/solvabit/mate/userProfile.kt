@@ -1,6 +1,7 @@
 package com.solvabit.mate
 
 import android.os.Bundle
+import android.provider.SyncStateContract.Helpers.update
 import android.util.Log
 import android.view.View
 import android.widget.ImageView
@@ -16,26 +17,32 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.FileDownloadTask
 import com.google.firebase.storage.FirebaseStorage
 import io.github.rosariopfernandes.firecoil.load
+import kotlinx.android.synthetic.main.activity_registration.*
 import java.io.File
 
 
 class userProfile : AppCompatActivity() {
 
     val mDatabaseRef = FirebaseFirestore.getInstance()
+    val uid = fetchUserUid()
+    val dbRef = mDatabaseRef.collection("user").document(uid.toString())
+
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_user_profile)
 
 
-        val uid = fetchUserUid()
-        val dbRef = mDatabaseRef.collection("user").document(uid.toString())
+        loadImage()
+
 
         val personalinfo = findViewById<LinearLayout>(R.id.personalinfo)
-       val experience = findViewById<LinearLayout>(R.id.experience)
-       val review = findViewById<LinearLayout>(R.id.review)
-       val personalinfobtn = findViewById<TextView>(R.id.personalinfobtn)
-       val experiencebtn = findViewById<TextView>(R.id.experiencebtn)
-       val reviewbtn = findViewById<TextView>(R.id.reviewbtn)
+        val experience = findViewById<LinearLayout>(R.id.experience)
+        val review = findViewById<LinearLayout>(R.id.review)
+        val personalinfobtn = findViewById<TextView>(R.id.personalinfobtn)
+        val experiencebtn = findViewById<TextView>(R.id.experiencebtn)
+        val reviewbtn = findViewById<TextView>(R.id.reviewbtn)
 
         val username = findViewById<TextView>(R.id.username_text)
         val role = findViewById<TextView>(R.id.role_txt)
@@ -43,6 +50,7 @@ class userProfile : AppCompatActivity() {
         val phoneNo = findViewById<TextView>(R.id.phone_txt)
         val email = findViewById<TextView>(R.id.email_txt)
         val college = findViewById<TextView>(R.id.college_txt)
+
 
         dbRef.get().addOnSuccessListener {
             username.text = it.get("firstName").toString()
@@ -74,24 +82,12 @@ class userProfile : AppCompatActivity() {
         }
 
 
-       val imageView= findViewById<ImageView>(R.id.profile_imageView)
-        val  storageRef = FirebaseStorage.getInstance().reference
-        val pathRef =storageRef.child("user/shekhar_200x200.jpg")
-        imageView.load(pathRef) {
-            transformations(CircleCropTransformation())
-        }
-
-
-
-        /*making personal info visible*/
-        /*making personal info visible*/
-
-
 
         personalinfo.setVisibility(View.VISIBLE)
-        experience.setVisibility(View.GONE)
-        review.setVisibility(View.GONE)
 
+        experience.setVisibility(View.GONE)
+
+        review.setVisibility(View.GONE)
 
         personalinfobtn.setOnClickListener(View.OnClickListener {
             personalinfo.setVisibility(View.VISIBLE)
@@ -119,6 +115,17 @@ class userProfile : AppCompatActivity() {
             experiencebtn.setTextColor(resources.getColor(R.color.grey))
             reviewbtn.setTextColor(resources.getColor(R.color.blue))
         })
+    }
+
+
+
+    private fun loadImage(){
+        val imageView= findViewById<ImageView>(R.id.profile_imageView)
+        val  storageRef = FirebaseStorage.getInstance().reference
+        val pathRef =storageRef.child("user/shekhar_200x200.jpg")
+        imageView.load(pathRef) {
+            transformations(CircleCropTransformation())
+        }
     }
 
     private fun fetchUserUid(): String? {
